@@ -1,0 +1,177 @@
+#include <C:\masm32\include\RESOURCE.H>
+#define IDM_MAIN                4000
+#define IDM_MAIN_RBUTTONDOWN    4100
+#define IDM_GDI                 4200
+#define IDM_GDI_RBUTTONDOWN     4300
+
+#define DLG_CIRCLE              5000
+
+#define IDA_MAIN                4000
+#define	IDA_GDI					4200
+
+#define IDC_DEFINED             2000
+
+#define IDI_DEFINED             1000
+
+;DIALOG BOXES
+#define IDD_CIRCLE              1       
+#define IDD_OVAL                2
+#define IDD_SPHERE              3
+#define IDD_ELLIPSOID           4
+
+IDM_MAIN    MENU    discardable
+BEGIN
+    popup   "绘图"
+    BEGIN
+        popup   "二维图形"
+        BEGIN
+            menuitem    "圆(&C)\tALT+C",     4001
+            menuitem    "椭圆(&O)\tALT+O",   4002
+        END
+        popup   "三维图形"
+        BEGIN
+            menuitem    "球(&S)\tALT+S",     4003
+            menuitem    "椭球(&E)\tALT+E",   4004
+        END
+    END    
+    popup   "功能"
+    BEGIN
+        menuitem    "统计(&S)\tCtrl+S",           4005,   GRAYED
+        menuitem    "文件输出TXT(&O)\tCtrl+O",    4006,   GRAYED
+    END
+    popup   "设置"
+    BEGIN
+        menuitem    "光标（默认）(&A)",           4007
+        menuitem    "光标（十字准星）(&B)",       4008
+        menuitem    separator
+        menuitem    "图标（默认）(&C)",           4009
+        menuitem    "图标（自定义）(&D)",         4010
+    END
+END
+
+IDM_MAIN_RBUTTONDOWN    MENU    discardable
+BEGIN
+    popup   "视图"
+    BEGIN
+        menuitem    "向上移动视角(&W)\tW",    4101
+        menuitem    "向下移动视角(&S)\tS",    4102
+        menuitem    "向左移动视角(&A)\tA",    4103
+        menuitem    "向右移动视角(&D)\tD",    4104
+        menuitem    "上一层(&C)\tC",          4105
+        menuitem    "下一层(&V)\tV",          4106
+        menuitem    "放大(&Z)\tZ",            4107
+        menuitem    "缩小(&X)\tX",            4108
+    END
+END
+
+IDM_GDI             MENU    discardable
+BEGIN
+    popup   "视图"
+    BEGIN
+        menuitem    "向上移动视角(&W)\tW",    4301
+        menuitem    "向下移动视角(&S)\tS",    4302
+        menuitem    "向左移动视角(&A)\tA",    4303
+        menuitem    "向右移动视角(&D)\tD",    4304
+        menuitem    "上一层(&C)\tC",          4305
+        menuitem    "下一层(&V)\tV",          4306
+        menuitem    "放大(&Z)\tZ",            4307
+        menuitem    "缩小(&X)\tX",            4308
+		menuitem    "初始大小(&I)\tI",       4309
+    END
+END
+
+IDM_GDI_RBUTTONDOWN    MENU    discardable
+BEGIN
+    popup   "视图"
+    BEGIN
+        menuitem    "向上移动视角(&W)\tW",    4301
+        menuitem    "向下移动视角(&S)\tS",    4302
+        menuitem    "向左移动视角(&A)\tA",    4303
+        menuitem    "向右移动视角(&D)\tD",    4304
+        menuitem    "上一层(&C)\tC",          4305
+        menuitem    "下一层(&V)\tV",          4306
+        menuitem    "放大(&Z)\tZ",            4307
+        menuitem    "缩小(&X)\tX",            4308
+		menuitem    "初始大小(&I)\tI",       4309
+    END
+END
+
+IDA_MAIN         ACCELERATORS
+BEGIN
+    "C",        4001,   VIRTKEY,ALT
+    "O",        4002,   VIRTKEY,ALT
+    "S",        4003,   VIRTKEY,ALT
+    "E",        4004,   VIRTKEY,ALT
+    "S",        4005,   VIRTKEY,CONTROL
+    "O",        4006,   VIRTKEY,CONTROL
+    
+    "W",        4101,   VIRTKEY
+    "S",        4102,   VIRTKEY
+    "A",        4103,   VIRTKEY
+    "D",        4104,   VIRTKEY
+    "C",        4105,   VIRTKEY
+    "V",        4106,   VIRTKEY
+    "Z",        4107,   VIRTKEY
+    "X",        4108,   VIRTKEY
+END
+
+IDA_GDI         ACCELERATORS
+BEGIN  
+    "W",        4301,   VIRTKEY
+    "S",        4302,   VIRTKEY
+    "A",        4303,   VIRTKEY
+    "D",        4304,   VIRTKEY
+    "C",        4305,   VIRTKEY
+    "V",        4306,   VIRTKEY
+    "Z",        4307,   VIRTKEY
+    "X",        4308,   VIRTKEY
+	"I",		4309,	VIRTKEY
+END
+
+IDC_DEFINED         CURSOR  "cursor_mc.cur"
+IDI_DEFINED         ICON    "icon.ico"
+
+
+#define IDET_CIRCLE_RADIUS  3
+#define IDACB_CIRCLE_THICK  4
+#define IDET_CIRCLE_THICK   5
+IDD_CIRCLE      DIALOG  50,50,150,150
+STYLE   WS_EX_OVERLAPPEDWINDOW|WS_CAPTION|WS_VISIBLE|WS_SYSMENU|WS_POPUP
+CAPTION "输入圆的参数"
+FONT    9,"宋体"
+{
+EDITTEXT    IDET_CIRCLE_RADIUS,8,16,105,12,ES_NUMBER
+AUTOCHECKBOX    "自定义轮廓厚度（默认1格）(&D)",IDACB_CIRCLE_THICK,8,33,130,12
+EDITTEXT    IDET_CIRCLE_THICK,8,59,105,12,ES_NUMBER|WS_DISABLED
+DEFPUSHBUTTON   "完成",IDOK,8,130,50,14
+DEFPUSHBUTTON   "取消",IDCANCEL,90,130,50,14
+LTEXT   "半径(&R):",-1,8,4,70,12
+LTEXT   "厚度(&T):",-1,8,47,70,12
+CONTROL "",-1,"Static",SS_ETCHEDHORZ|WS_CHILD|WS_VISIBLE,6,30,140,1
+CONTROL "",-1,"Static",SS_ETCHEDHORZ|WS_CHILD|WS_VISIBLE,6,127,140,1
+}
+
+#define IDET_OVAL_LONGAXIS  3
+#define IDET_OVAL_SHORTAXIS  4
+#define IDACB_OVAL_THICK  5
+#define IDET_OVAL_THICK   6
+IDD_OVAL      DIALOG  50,50,150,150
+STYLE   WS_EX_OVERLAPPEDWINDOW|WS_CAPTION|WS_VISIBLE|WS_SYSMENU|WS_POPUP
+CAPTION "输入椭圆的参数"
+FONT    9,"宋体"
+{
+EDITTEXT    IDET_OVAL_LONGAXIS,8,16,105,12,ES_NUMBER
+EDITTEXT    IDET_OVAL_SHORTAXIS,8,42,105,12,ES_NUMBER
+AUTOCHECKBOX    "自定义轮廓厚度（默认1格）(&D)",IDACB_OVAL_THICK,8,59,130,12
+EDITTEXT    IDET_OVAL_THICK,8,85,105,12,ES_NUMBER|WS_DISABLED
+DEFPUSHBUTTON   "完成",IDOK,8,130,50,14
+DEFPUSHBUTTON   "取消",IDCANCEL,90,130,50,14
+LTEXT   "长半轴(&R):",-1,8,4,70,12
+LTEXT   "短半轴(&R):",-1,8,30,70,12
+LTEXT   "厚度(&T):",-1,8,73,70,12
+CONTROL "",-1,"Static",SS_ETCHEDHORZ|WS_CHILD|WS_VISIBLE,6,56,140,1
+CONTROL "",-1,"Static",SS_ETCHEDHORZ|WS_CHILD|WS_VISIBLE,6,128,140,1
+}
+
+
+

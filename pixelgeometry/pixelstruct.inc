@@ -1,0 +1,53 @@
+PIXELCIRCLE		STRUCT
+	Radius		DWORD	?
+	Thickness	DWORD	?
+	hWnd		DWORD	?
+PIXELCIRCLE		ENDS
+
+PIXELOVAL		STRUCT
+	xAxis		DWORD	?
+	yAxis		DWORD	?
+	Thickness	DWORD	?
+	hWnd		DWORD	?
+PIXELOVAL		ENDS
+
+PIXELSPHERE		STRUCT
+	Radius		DWORD	?
+	Thickness	DWORD	?
+	hWnd		DWORD	?
+PIXELSPHERE		ENDS
+
+PIXELELLIPSOID		STRUCT
+	xAxis		DWORD	?
+	yAxis		DWORD	?
+	zAxis		DWORD	?
+	Thickness	DWORD	?
+	hWnd		DWORD	?
+PIXELELLIPSOID		ENDS
+
+SHAPEINFO		STRUCT
+	xAxis		DWORD	?
+	yAxis		DWORD	?
+	zAxis		DWORD	?
+	Thickness	DWORD	?
+SHAPEINFO		ENDS
+
+WININFO			STRUCT
+	xPos		DWORD	?
+	yPos		DWORD	?
+	InblockxCoord	DWORD	?
+	InblockyCoord	DWORD	?
+	PixelSideLen		DWORD	?
+	hWnd		DWORD	?
+WININFO			ENDS
+
+USEDMEMORYINFO	STRUCT
+	lpMemory	DWORD	?
+	MemoryLen	DWORD	?
+USEDMEMORYINFO	ENDS
+
+PIXELGRAPH		STRUCT
+	ShapeInfo	SHAPEINFO	<>
+	WinInfo		WININFO		<>
+	UsedMemoryInfo	USEDMEMORYINFO	<>
+PIXELGRAPH		ENDS
